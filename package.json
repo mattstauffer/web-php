@@ -2,7 +2,12 @@
   "name": "php.net",
   "devDependencies": {
     "@playwright/test": "^1.44.0",
-    "@types/node": "^20.12.11"
+    "@types/node": "^20.12.11",
+    "esbuild": "0.28.2",
+    "motion": "14.12.0",
+    "three": "0.187.0"
   },
-  "scripts": {}
+  "scripts": {
+    "build:vendor": "esbuild --bundle --minify --format=esm --target=es2020 --legal-comments=inline tools/js-vendor/motion.js \"--banner:js=/*! Motion 14.12.0 | MIT License | https://motion.dev */\" --outfile=public/js/ext/motion-14.12.0.min.js && esbuild --bundle --minify --format=esm --target=es2020 --legal-comments=inline tools/js-vendor/three.js --outfile=public/js/ext/three-0.187.0.min.js"
+  }
 }

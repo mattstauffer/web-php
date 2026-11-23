@@ -286,6 +286,24 @@
 }
 
 /*
+ * The 3D globe (js/homepage-globe.js). The canvas overhangs the drawing so the
+ * orbits have room to tilt; once it has drawn its first frame, the flat globe
+ * and wordmark underneath fade out and the canvas fades in.
+ */
+.hero__canvas {
+    position: absolute;
+    inset: -12%;
+    width: 124%;
+    height: 124%;
+    opacity: 0;
+    transition: opacity .9s ease-out;
+}
+
+.hero__art--3d .hero__canvas { opacity: 1; }
+.hero__art .hero-art__flat { transition: opacity .6s ease-out; }
+.hero__art--3d .hero-art__flat { opacity: 0; }
+
+/*
  * Latest news and releases, a strip of full-bleed rows closing out the hero.
  * The logo wall's top border closes off the last row.
  */
@@ -772,6 +790,7 @@
 .ecosystem__stats-body { position: relative; }
 
 .ecosystem__headline-stat {
+    font-variant-numeric: tabular-nums;
     font-size: 4rem;
     line-height: 1;
     font-weight: 600;
@@ -803,6 +822,7 @@
 }
 
 .stat-card__value {
+    font-variant-numeric: tabular-nums;
     font-size: 1.875rem;
     line-height: 1;
     font-weight: 500;

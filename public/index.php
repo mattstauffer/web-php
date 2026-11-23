@@ -36,6 +36,8 @@ $timestamps[] = (int) @filemtime(__DIR__ . "/js/site-header.js");
 $timestamps[] = (int) @filemtime(__DIR__ . "/js/homepage.js");
 $timestamps[] = (int) @filemtime(__DIR__ . "/js/copy-code.js");
 $timestamps[] = (int) @filemtime(__DIR__ . "/js/keyboard.js");
+$timestamps[] = (int) @filemtime(__DIR__ . "/js/homepage-motion.js");
+$timestamps[] = (int) @filemtime(__DIR__ . "/js/homepage-globe.js");
 
 // The release timeline and the years-open count change with the year
 $timestamps[] = (new DateTimeImmutable(date('Y') . '-01-01'))->getTimestamp();
@@ -73,6 +75,7 @@ site_header(null, [
     'design' => '2026',
     'css' => ['homepage.css'],
     'js_files' => ['js/homepage.js'],
+    'js_modules' => ['js/homepage-motion.js'],
     'release_pill_href' => '#release',
     'cache_control' => 5 * 60, // 5 minutes
 ]);
@@ -91,7 +94,7 @@ site_header(null, [
               <a href="/downloads.php" class="text-link">Download PHP<?= site_icon('arrow-up-right') ?></a>
             </div>
           </div>
-          <div class="hero__art draft-enter" aria-hidden="true">
+          <div class="hero__art draft-enter" aria-hidden="true" data-hero-globe="/cached.php?t=<?= (int) @filemtime(__DIR__ . '/js/homepage-globe.js') ?>&amp;f=/js/homepage-globe.js">
             <?= site_svg('hero-php-globe') ?>
           </div>
         </div>

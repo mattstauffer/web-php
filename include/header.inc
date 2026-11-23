@@ -55,6 +55,14 @@ foreach($js_files as $filename) {
     $JS[$filename] = @filemtime($path);
 }
 
+// ES modules ('js_modules'), loaded with type="module" (so deferred). Their own
+// imports go to absolute /js/... paths, as they are served from /cached.php.
+$JS_MODULES = [];
+foreach($config['js_modules'] ?? [] as $filename) {
+    $path = ProjectGlobals::getPublicRoot() . '/' . $filename;
+    $JS_MODULES[$filename] = @filemtime($path);
+}
+
 if (isset($shortname) && $shortname) {
     header("Link: <$shorturl>; rel=shorturl");
 }
@@ -132,6 +140,10 @@ if (!isset($config["languages"])) {
 
 <?php foreach($JS as $filename => $modified): ?>
 <script type="text/javascript" src="/cached.php?t=<?php echo $modified?>&amp;f=<?php echo $filename?>"></script>
+<?php endforeach ?>
+
+<?php foreach($JS_MODULES as $filename => $modified): ?>
+<script type="module" src="/cached.php?t=<?php echo $modified?>&amp;f=<?php echo $filename?>"></script>
 <?php endforeach ?>
 
 <?php if (isset($config['meta_tags'])) { echo $config['meta_tags']; } ?>
